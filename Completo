@@ -109,7 +109,7 @@ var mask2 = MaskTextInputFormatter(mask: '##.##');
              controller: _peso,
               inputFormatters: [mask2],
             ),             
-             Text("seu IMC è $_imc",
+            Text(_imc == null ? 'Informe seus dados' : _imc!.toStringAsFixed(2),
              style: const TextStyle(fontSize: 25),) ,
              Text(txt1),
              ElevatedButton(
