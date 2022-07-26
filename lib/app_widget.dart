@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(       
       primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Calculadora de Imc'),
+      home: const MyHomePage(title: 'Calculate BMI'),
     );
   }
 }
