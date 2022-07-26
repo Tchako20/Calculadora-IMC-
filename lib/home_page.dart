@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
  if(height == null || height<=0 || weight==null || weight<=0 ){
   
    setState(() {    
-   textMenssage="Error,Please Enter Your Details";
+   textMenssage="Error,Please Enter Your Details!";
      }
     );  
     return; 
@@ -31,11 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
   setState(() {    
   _bmi=weight / (height*height);
   if(_bmi! <18.50){
-   textMenssage="You Are Under The Ideal Weight";
+   textMenssage="You Are Under The Ideal Weight!";
   }else if(_bmi! <25.00){
-   textMenssage="You're Healthy";
+   textMenssage="You're Healthy!";
   }else if(_bmi! <30.00){
-   textMenssage="You're Above The Ideal Weight";
+   textMenssage="You're Above The Ideal Weight!";
   }
      
   });
@@ -88,7 +88,7 @@ final maskHeight = MaskTextInputFormatter(mask: '#.##');final maskWeight = MaskT
              controller: _weight,
               inputFormatters: [maskWeight],
             ),//TextField Weight
-             Text(_bmi==null?'Please Enter Your Details':_bmi!.toStringAsFixed(2),
+             Text(_bmi==null?'Please Enter Your Details!':_bmi!.toStringAsFixed(2),
              style: const TextStyle(fontSize: 22),) ,
              Text(textMenssage,style: const TextStyle(fontSize: 18),
              ),//Start Text
