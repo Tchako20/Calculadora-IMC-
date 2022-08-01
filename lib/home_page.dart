@@ -11,38 +11,38 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _altura=TextEditingController();
-  final _peso=TextEditingController();
-   String txt1="";
-   double? _imc;
+  final _height=TextEditingController();
+  final _weight=TextEditingController();
+   String textMenssage="";
+   double? _bmi;
 
-  void _calculoImc () {
-    final double? altura = double.tryParse(_altura.value.text);
-    final double? peso = double.tryParse(_peso.value.text);
+  void _calculateBmi () {
+    final double? height = double.tryParse(_height.value.text);
+    final double? weight = double.tryParse(_weight.value.text);
     
- if(altura == null || altura<=0 || peso==null || peso<=0 ){
+ if(height == null || height<=0 || weight==null || weight<=0 ){
   
    setState(() {    
-   txt1="Error,Por favor insira seus dados";
+   textMenssage="Error,Please Enter Your Details!";
      }
     );  
     return; 
   }
   setState(() {    
-  _imc=peso / (altura*altura);
-  if(_imc! <18.5){
-   txt1="Você esta abaixo do peso ideal";
-  }else if(_imc! <25.00){
-   txt1="Você esta saudavel  ";
-  }else if(_imc! <30.00){
-   txt1="Você esta acima do peso ideal";
+  _bmi=weight / (height*height);
+  if(_bmi! <18.50){
+   textMenssage="You Are Under The Ideal Weight!";
+  }else if(_bmi! <25.00){
+   textMenssage="You're Healthy!";
+  }else if(_bmi! <30.00){
+   textMenssage="You're Above The Ideal Weight!";
   }
      
   });
  }
 
-var mask1 = MaskTextInputFormatter(mask: '#.##');
-var mask2 = MaskTextInputFormatter(mask: '##.##');
+final maskHeight = MaskTextInputFormatter(mask: '#.##');final maskWeight = MaskTextInputFormatter(mask: '##.##');
+//MaskText for Height and Weight  
 
   @override
   Widget build(BuildContext context) {   
@@ -66,41 +66,44 @@ var mask2 = MaskTextInputFormatter(mask: '##.##');
              style: const TextStyle(fontSize: 22),
               decoration: const InputDecoration(
                border: OutlineInputBorder(),
-               labelText: "Altura",
+               labelText: "Height",
                prefixIcon: Icon(Icons.person),
-               suffixText: 'ALT.',
-               hintText: '0.00',
+               suffixText: 'm.',
+               hintText: '0.00 m',
              ),
              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-             controller: _altura,
-              inputFormatters: [mask1],
-            ),
+             controller: _height,
+              inputFormatters: [maskHeight],
+            ),//TextField Height
             TextField(
              style: const TextStyle(fontSize: 22),
               decoration: const InputDecoration(
                border: OutlineInputBorder(),
-               labelText: "Peso",
+               labelText: "Weight",
                prefixIcon: Icon(Icons.person),
-               suffixText: 'KG.',
-               hintText: '00.00',
+               suffixText: 'kg',
+               hintText: '00.00 kg',
                ),
              keyboardType: const TextInputType.numberWithOptions(decimal: true),
-             controller: _peso,
-              inputFormatters: [mask2],
-            ),             
-             Text(_imc==null?'Informe seus dados':_imc!.toStringAsFixed(2),
-             style: const TextStyle(fontSize: 25),) ,
-             Text(txt1,style: const TextStyle(fontSize: 15),),
+             controller: _weight,
+              inputFormatters: [maskWeight],
+            ),//TextField Weight
+             Text(_bmi==null?'Please Enter Your Details!':_bmi!.toStringAsFixed(2),
+             style: const TextStyle(fontSize: 22),) ,
+             Text(textMenssage,style: const TextStyle(fontSize: 18),
+             ),//Start Text
              ElevatedButton(
-              onPressed: _calculoImc, 
-              child: const Text("Calcular")), 
-              ],       
+              onPressed: _calculateBmi, 
+              child: const Text("Calculate",
+              style: TextStyle(fontSize: 18),)
+               ), //Button calculate
+             ],       
             ),
            ),
           ),
+         ),
         ),
-      ),
      
-    );
+     );
   }
 }
